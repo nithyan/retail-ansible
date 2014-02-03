@@ -1,0 +1,3 @@
+# common handlers
+- name: All Jobs complete
+  command: echo "All jobs complete!"

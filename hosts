@@ -1,0 +1,2 @@
+[showcase]
+localhost ansible_connection=local

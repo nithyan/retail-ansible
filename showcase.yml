@@ -1,0 +1,4 @@
+#file: showcase.yml
+- hosts: showcase
+- roles: 
+   - common

@@ -1,0 +1,27 @@
+# plays common across all nodes
+- name: Copy EPEL repository
+  copy: src=epel.repo dest=/etc/yum.repos.d/epel.repo
+
+- name: Create the GPG key for EPEL
+  copy: src=RPM-GPG-KEY-EPEL-6 dest=/etc/pki/rpm-gpg  
+
+- name: Copy REMI repository
+  copy: src=remi.repo dest=/etc/yum.repos.d/remi.repo
+
+- name: Create the GPG key for REMI
+  copy: src=RPM-GPG-KEY-remi dest=/etc/pki/rpm-gpg  
+
+- name: Install Java and other dependencies
+  yum: name={{ item }} state=installed
+  with_items:
+  	- java-1.6.0-openjdk
+  	- java-1.6.0-openjdk-devel
+  	- libselinux-python
+  	- unzip
+  	- git
+  	- zip
+  	- wget
+  	- gcc
+  	- gcc-c++
+  	- ncurses-devel
+  	- ncurses
