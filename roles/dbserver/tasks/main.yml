@@ -1,0 +1,25 @@
+#plays postgres across all nodes
+- name: Install postgres rpm
+  yum: name={{postgresql_rpm}} state=installed
+
+- name: Install postgres packages
+  yum: name={{item}} state=installed
+  with_items:
+      - postgresql{{postgresql_server_version_name}}-libs
+      - postgresql{{postgresql_server_version_name}}
+      - postgresql{{postgresql_server_version_name}}-server
+      - postgresql{{postgresql_server_version_name}}-contrib
+      - postgresql{{postgresql_server_version_name}}-devel
+
+- name: Install python-psycopg2 package
+  yum: name=python-psycopg2 state=installed
+
+- name: Existence of postgres configuration file
+  stat: path={{postgresql_configuration_file_location}}
+  ignore_errors: True
+  register: result
+
+- name: Initiating database
+  command: service postgresql-{{postgresql_version}} initdb
+  when: not result.stat.exists
+  notify: Start postgres service 

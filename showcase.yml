@@ -1,4 +1,8 @@
 #file: showcase.yml
+---
 - hosts: showcase
-- roles: 
-   - common
+  sudo: yes
+  user: ansible_user
+  roles: 
+    - common
+    - dbserver  

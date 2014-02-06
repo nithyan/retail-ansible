@@ -1,2 +1,2 @@
 [showcase]
-localhost ansible_connection=local
+192.168.249.129

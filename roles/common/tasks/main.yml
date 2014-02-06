@@ -11,17 +11,35 @@
 - name: Create the GPG key for REMI
   copy: src=RPM-GPG-KEY-remi dest=/etc/pki/rpm-gpg  
 
-- name: Install Java and other dependencies
-  yum: name={{ item }} state=installed
-  with_items:
-  	- java-1.6.0-openjdk
-  	- java-1.6.0-openjdk-devel
-  	- libselinux-python
-  	- unzip
-  	- git
-  	- zip
-  	- wget
-  	- gcc
-  	- gcc-c++
-  	- ncurses-devel
-  	- ncurses
+- name: Install Java package
+  yum: name=java-1.6.0-openjdk state=installed
+
+- name: Install Java development package
+  yum: name=java-1.6.0-openjdk-devel state=installed
+
+- name: Install libselinux-python
+  yum: name=libselinux-python state=installed  
+
+- name: Install unzip package
+  yum: name=unzip state=installed  
+
+- name: Install zip package
+  yum: name=zip state=installed
+
+- name: Install git package
+  yum: name=git state=installed
+
+- name: Install wget package
+  yum: name=wget state=installed
+
+- name: Install gcc package
+  yum: name=gcc state=installed
+
+- name: Install gcc-c++ package
+  yum: name=gcc-c++ state=installed
+
+- name: Install ncurses package
+  yum: name=ncurses state=installed
+
+- name: Install ncurses-devel package
+  yum: name=ncurses-devel state=installed
