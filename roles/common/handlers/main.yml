@@ -1,3 +1,3 @@
 # common handlers
-- name: All Jobs complete
-  command: echo "All jobs complete!"
+- name: restart postgres
+  service: name=postgresql-{{postgresql_version}} state=restarted

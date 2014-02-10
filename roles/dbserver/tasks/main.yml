@@ -1,6 +1,6 @@
 #plays postgres across all nodes
 - name: Install postgres rpm
-  yum: name={{postgresql_rpm}} state=installed
+  yum: name={{postgresql_rpm}} state=present
 
 - name: Install postgres packages
   yum: name={{item}} state=installed
@@ -22,4 +22,15 @@
 - name: Initiating database
   command: service postgresql-{{postgresql_version}} initdb
   when: not result.stat.exists
-  notify: Start postgres service 
+
+- name: Start postgres service
+  service: name=postgresql-{{postgresql_version}} state=started 
+
+- name: update postgres client configuration
+  template: src=pg_hba.conf dest=/var/lib/pgsql/{{postgresql_version}}/data/pg_hba.conf
+  notify: restart postgres
+
+
+- name: postgres should run automatically during system boot
+  command: chkconfig postgresql-{{postgresql_version}} on
+

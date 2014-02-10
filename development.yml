@@ -1,0 +1,8 @@
+#file: vagrant.yml
+---
+- hosts: vagrant
+  sudo: yes
+  user: vagrant
+  roles: 
+    - common
+    - dbserver 
